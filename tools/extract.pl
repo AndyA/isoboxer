@@ -17,8 +17,8 @@ while ( <> ) {
     $ln =~ s/([{}])(?!\s*$)/$1\n/g;
     for my $frag ( split /\n/, $ln ) {
       my $lnest = $nest;
-      for ( grep /[\[\(\{\}\)\]]/, split //, $frag ) {
-        $nest += /[\[\(\{]/ ? 1 : -1;
+      for ( grep /[{}]/, split //, $frag ) {
+        $nest += /[{]/ ? 1 : -1;
         $force = 0;
       }
       $frag =~ s/^\s+//;

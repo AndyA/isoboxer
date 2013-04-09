@@ -1907,7 +1907,8 @@ The following flags are defined in the tf_flags:
 8.8.7.2 Syntax
 aligned(8) class TrackFragmentHeaderBox extends FullBox(‘tfhd’, 0, tf_flags){
 unsigned int(32) track_ID;
-// all the following are optional fields unsigned int(64) base_data_offset; unsigned int(32) sample_description_index; unsigned int(32) default_sample_duration; unsigned int(32) default_sample_size; unsigned int(32) default_sample_flags
+// all the following are optional fields 
+unsigned int(64) base_data_offset; unsigned int(32) sample_description_index; unsigned int(32) default_sample_duration; unsigned int(32) default_sample_size; unsigned int(32) default_sample_flags
 }
 8.8.7.3 Semantics
 base_data_offset the base offset to use when calculating data offsets
@@ -1980,7 +1981,7 @@ if(version==1){
    unsigned int(32)  time;
    unsigned int(32)  moof_offset;
 }
-unsignedint((length_size_of_traf_num+1)*8) traf_number; unsignedint((length_size_of_trun_num+1)*8) trun_number; unsigned int((length_size_of_sample_num+1) * 8)sample_number;
+unsigned int((length_size_of_traf_num+1)*8) traf_number; unsigned int((length_size_of_trun_num+1)*8) trun_number; unsigned int((length_size_of_sample_num+1) * 8)sample_number;
 } }
 8.8.10.3 Semantics
 track_ID is an integer identifying the track_ID.
@@ -2203,7 +2204,6 @@ aligned(8) class MetaBox (handler_type) extends FullBox(‘meta’, version = 0,
    ItemInfoBox
    IPMPControlBox
    Box   other_boxes[];
-8.11.1.3 Semantics
 primary_resource;
 file_locations;
 item_locations;
@@ -2233,9 +2233,6 @@ string xml; }
 aligned(8) class BinaryXMLBox
       extends FullBox(‘bxml’, version = 0, 0) {
    unsigned int(8) data[];
-8.11.3 The Item Location Box 8.11.3.1 Definition
-Box Type: ‘iloc’ Container: Meta box (‘meta’) Mandatory: No
-Quantity: Zero or one
 // to end of box
 }
 The item location box provides a directory of resources in this or other files, by locating their containing file, their offset within that file, and their length. Placing this in binary format enables common handling of this data, even by systems which do not understand the particular metadata system (handler) used. For example, a system might integrate all the externally referenced metadata resources into one file, re-adjusting file offsets and file references accordingly.
@@ -2344,13 +2341,6 @@ aligned(8) class ItemInfoBox
    unsigned int(16) entry_count;
    ItemInfoEntry[ entry_count ]     item_infos;
 }
-8.11.6.3 Semantics
-item_id contains either 0 for the primary resource (e.g., the XML contained in an ‘xml ‘ box) or the ID of the item for which the following information is defined.
-item_protection_index contains either 0 for an unprotected item, or the one-based index into the item protection box defining the protection applied to this item (the first box in the item protection box has the index 1).
-item_name is a null-terminated string in UTF-8 characters containing a symbolic name of the item (source file for file delivery transmissions).
-content_type is a null-terminated string in UTF-8 characters with the MIME type of the item. If the item is content encoded (see below), then the content type refers to the item after content decoding.
-content_encoding is an optional null-terminated string in UTF-8 characters used to indicate that the binary file is encoded and needs to be decoded before interpreted. The values are as defined for Content-Encoding for HTTP/1.1. Some possible values are “gzip”, “compress” and “deflate”. An empty string indicates no content encoding. Note that the item is stored after the content encoding has been applied.
-extension_type is a printable four-character code that identifies the extension fields of version 1 with respect to version 0 of the Item information entry.
 item_name;
 content_type; content_encoding; //optional
 extension_type; //optional ItemInfoExtension(extension_type); //optional
@@ -2468,7 +2458,6 @@ aligned(8) class ProtectionSchemeInfoBox(fmt) extends Box('sinf') { OriginalForm
 IPMPInfoBox
    SchemeTypeBox
    SchemeInformationBox
-8.12.2 Original Format Box 8.12.2.1 Definition
 IPMP_descriptors; // optional
 scheme_type_box; // optional info; // optional
 }
