@@ -7,7 +7,7 @@ use JSON;
 
 my @keyword = qw(
  abstract aligned bit break case char class const else extends for if
- int reserved signed string switch template unsigned
+ int optional reserved signed string switch template unsigned
 );
 
 my @operator = qw( != == = ++ -- + - * / <= << < >= >> > || && | & );
