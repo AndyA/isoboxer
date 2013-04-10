@@ -10,8 +10,7 @@ my @keyword = qw(
  reserved signed string switch template unsigned
 );
 
-# Only list the operators found in 14496-12
-my @operator = qw( == = ++ + / <= << < > * || & - );
+my @operator = qw( != == = ++ -- + - * / <= << < >= >> > || && | & );
 
 my $is_kw = join '|', @keyword;
 my $is_oper = join '|', map quotemeta, @operator;
