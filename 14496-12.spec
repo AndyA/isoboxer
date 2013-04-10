@@ -133,7 +133,8 @@ aligned(8) class MediaHeaderBox extends FullBox(‘mdhd’, version, 0) {
     unsigned int(32)  duration;
   }
   bit(1) pad = 0;
-  unsigned int(5)[3] language; // ISO-639-2/T language code unsigned int(16) pre_defined = 0;
+  unsigned int(5)[3] language; // ISO-639-2/T language code
+  unsigned int(16) pre_defined = 0;
 }
 
 aligned(8) class HandlerBox extends FullBox(‘hdlr’, version = 0, 0) {
@@ -149,10 +150,11 @@ aligned(8) class MediaInformationBox extends Box(‘minf’) {
 aligned(8) class VideoMediaHeaderBox
 
 extends FullBox(‘vmhd’, version = 0, 1) {
-  template unsigned int(16) graphicsmode = 0; // copy, see below template unsigned int(16)[3] opcolor = {
-  0, 0, 0
-}
-;
+  template unsigned int(16) graphicsmode = 0; // copy, see below template
+  unsigned int(16)[3] opcolor = {
+    0, 0, 0
+  }
+  ;
 }
 
 aligned(8) class SoundMediaHeaderBox
